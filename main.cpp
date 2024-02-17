@@ -94,7 +94,7 @@ public:
     bool get(size_t index) {
         auto position = _calculate_position(index);
 
-        return (_array[position.first] >> position.second) & 1;
+        return (_array[position.first] >> (8-1-position.second)) & 1;
     }
 
     bool at(size_t index) {
@@ -109,9 +109,9 @@ public:
         auto position = _calculate_position(index);
 
         if (value)
-            _array[position.first] = _array[position.first] | (1 << position.second);
+            _array[position.first] = _array[position.first] | (1 << (8-1-position.second));
         else
-            _array[position.first] = _array[position.first] & ~(1 << position.second);
+            _array[position.first] = _array[position.first] & ~(1 << (8-1-position.second));
     }
 
     bool push_back(bool value) {
