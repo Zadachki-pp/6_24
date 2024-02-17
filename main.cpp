@@ -128,11 +128,12 @@ public:
     }
 
     bool erase(size_t index) {
-        for(auto last_index = _bits_count-1; last_index >= index; last_index--) {
-            set(last_index-1, get(last_index));
-        }
-
         _bits_count--;
+
+        for(auto first_index = index; first_index < _bits_count; first_index++) {
+            set(first_index, get(first_index+1));
+        }
+        set(_bits_count, false);
     }
 
     bool at(size_t index) {
