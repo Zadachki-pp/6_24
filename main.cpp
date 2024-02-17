@@ -158,8 +158,8 @@ public:
 
 
 int main() {
+    std::cout << "Set && push_back" << std::endl;
     BoolVector vector(8);
-    std::cout << vector.at(0) << std::endl;
     vector.set(0, true);
     vector.set(1, true);
     vector.set(2, false);
@@ -168,8 +168,30 @@ int main() {
     vector.set(5, true);
     vector.set(6, false);
     vector.set(7, true);
+    vector.push_back(true);
+    vector.push_back(true);
+    vector.push_back(false);
+    vector.push_back(true);
 
-    std::cout << vector.at(0) << vector.at(1) << vector.at(2) << vector.at(3) << vector.at(4) << vector.at(5) << vector.at(6) << vector.at(8) << std::endl;
+    std::cout << std::endl;
+    std::cout << "Get" << std::endl;
+    std::cout << vector.size() << std::endl;
+    vector.print();
+
+    std::cout << std::endl;
+    std::cout << "Insert" << std::endl;
+
+    vector.insert(7, false);
+    vector.insert(7, true);
+    std::cout << vector.size() << std::endl;
+    vector.print();
+
+    std::cout << std::endl;
+    std::cout << "Erase" << std::endl;
+    vector.erase(7);
+    vector.erase(7);
+    std::cout << vector.size() << std::endl;
+    vector.print();
 
     return 0;
 }
