@@ -119,13 +119,12 @@ public:
         if (_bits_count % 8 == 0) {
             _expand_array();
         }
+        _bits_count++;
 
         for(auto last_index = _bits_count-1; last_index > index; last_index--) {
-            set(last_index+1, get(last_index));
+            set(last_index, get(last_index-1));
         }
         set(index, value);
-
-        _bits_count++;
     }
 
     bool erase(size_t index) {
