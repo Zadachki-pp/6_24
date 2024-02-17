@@ -2,7 +2,12 @@
 #include <utility>
 
 
-class BoolVector {
+template <typename T>
+class Vector {};
+
+
+template <>
+class Vector<bool> {
     u_char* _array;
     size_t _size;
 
@@ -58,7 +63,7 @@ class BoolVector {
     }
 
 public:
-    explicit BoolVector(size_t bits_count) { // NOLINT(cppcoreguidelines-pro-type-member-init)
+    explicit Vector(size_t bits_count) { // NOLINT(cppcoreguidelines-pro-type-member-init)
         if (bits_count == 0) {
             std::cerr << "Invalid bits count" << std::endl;
             exit(1);
@@ -69,15 +74,15 @@ public:
         _create_array(_size);
     }
 
-    ~BoolVector() {
+    ~Vector() {
         _delete_array();
     }
 
-    BoolVector(const BoolVector& other) : BoolVector(other._bits_count) {  // NOLINT(cppcoreguidelines-pro-type-member-init)
+    Vector(const Vector& other) : Vector(other._bits_count) {  // NOLINT(cppcoreguidelines-pro-type-member-init)
         _copy_to_array(other._array, other._size);
     }
 
-    BoolVector& operator=(const BoolVector& other) {
+    Vector& operator=(const Vector& other) {
         if (this == &other) return *this;
 
         _size = other._size;
@@ -159,7 +164,7 @@ public:
 
 int main() {
     std::cout << "Set && push_back" << std::endl;
-    BoolVector vector(8);
+    Vector<bool> vector(8);
     vector.set(0, true);
     vector.set(1, true);
     vector.set(2, false);
