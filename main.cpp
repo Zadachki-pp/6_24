@@ -97,7 +97,7 @@ public:
         return (_array[position.first] >> (8-1-position.second)) & 1;
     }
 
-    bool set(size_t index, bool value) {
+    void set(size_t index, bool value) {
         auto position = _calculate_position(index);
 
         if (value)
@@ -106,7 +106,7 @@ public:
             _array[position.first] = _array[position.first] & ~(1 << (8-1-position.second));
     }
 
-    bool push_back(bool value) {
+    void push_back(bool value) {
         if (_bits_count % 8 == 0) {
             _expand_array();
         }
@@ -115,7 +115,7 @@ public:
         _bits_count++;
     }
 
-    bool insert(size_t index, bool value) {
+    void insert(size_t index, bool value) {
         if (_bits_count % 8 == 0) {
             _expand_array();
         }
@@ -127,7 +127,7 @@ public:
         set(index, value);
     }
 
-    bool erase(size_t index) {
+    void erase(size_t index) {
         _bits_count--;
 
         for(auto first_index = index; first_index < _bits_count; first_index++) {
