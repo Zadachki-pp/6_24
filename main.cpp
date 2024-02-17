@@ -97,14 +97,6 @@ public:
         return (_array[position.first] >> (8-1-position.second)) & 1;
     }
 
-    bool at(size_t index) {
-        if (index > size()-1) {
-            std::cerr << "Invalid index" << std::endl;
-            exit(1);
-        }
-        return get(index);
-    }
-
     bool set(size_t index, bool value) {
         auto position = _calculate_position(index);
 
@@ -144,21 +136,24 @@ public:
         _bits_count--;
     }
 
-//    bool insert(size_t index, bool value) {
-//        if (_bits_count % 8) {
-//            _expand_array();
-//        }
-//        u_int8_t n = 8-index;
-//        u_char last_bits = _array[0] & ((1 << n) - 1);  // Сохраняем биты справа
-//        _array[0] = _array[0] >> (n-1) << (n-1);  // Очищаем биты справа
-//
-//        // Записываем биты
-//        _array[0] = _array[0] | (last_bits >> 1);
-//        set(index, value);
-//        set(0+1, last_bits >> (n-1));  // Записываем оставшийся бит
-//
-//        _bits_count++;
-//    }
+    bool at(size_t index) {
+        if (index > size()-1) {
+            std::cerr << "Invalid index" << std::endl;
+            exit(1);
+        }
+        return get(index);
+    }
+
+    bool operator[](size_t index) {
+        return get(index);
+    }
+
+    void print() {
+        for (size_t i = 0; i < size(); i++) {
+            std::cout << (*this)[i];
+        }
+        std::cout << std::endl;
+    }
 };
 
 
