@@ -115,7 +115,7 @@ public:
     }
 
     bool push_back(bool value) {
-        if (_bits_count % 8) {
+        if (_bits_count % 8 == 0) {
             _expand_array();
         }
         set(_bits_count, value);
@@ -124,7 +124,7 @@ public:
     }
 
     bool insert(size_t index, bool value) {
-        if (_bits_count % 8) {
+        if (_bits_count % 8 == 0) {
             _expand_array();
         }
 
